@@ -6,6 +6,8 @@ This repository contains a clone of the popular 2048 game, developed using the U
   <img src="banner-2048.gif" width="350" height="350" alt="Centered Image">
 </div>
 
+- [Play](https://gr4ndsmurf.itch.io/2048-clone-unity)
+
 ## Features
 
 - **Flexible Grid System:** The game utilizes a `TileGrid` class, which facilitates a dynamic grid layout for the tiles.
