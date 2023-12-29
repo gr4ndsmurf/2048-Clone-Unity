@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Tile : MonoBehaviour
 {
@@ -33,5 +34,53 @@ public class Tile : MonoBehaviour
         this.cell.tile = this;
 
         transform.position = cell.transform.position;
+    }
+
+    public void MoveTo(Cell cell)
+    {
+        if (this.cell != null)
+        {
+            this.cell.tile = null;
+        }
+
+        this.cell = cell;
+        this.cell.tile = this;
+
+        StartCoroutine(Animate(cell.transform.position, false));
+    }
+
+    private IEnumerator Animate(Vector3 to, bool isMerging)
+    {
+        float elapsed = 0f;
+        float duration = 0.1f;
+
+        Vector3 from = transform.position;
+
+        while (elapsed < duration)
+        {
+            transform.position = Vector3.Lerp(from, to, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = to;
+
+        if (isMerging)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void Merge(Cell cell)
+    {
+        if (this.cell != null)
+        {
+            this.cell.tile = null;
+        }
+
+        this.cell = null;
+        cell.tile.isLocked = true;
+
+        StartCoroutine(Animate(cell.transform.position, true));
     }
 }

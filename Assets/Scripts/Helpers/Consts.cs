@@ -16,4 +16,9 @@ public static class Consts
         public const int NUMBER_1024 = 1024;
         public const int NUMBER_2048 = 2048;
     }
+
+    public struct SaveValues
+    {
+        public const string BEST_SCORE = "BestScore";
+    }
 }
